@@ -3,6 +3,7 @@ import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import { Room } from './models/Room';
 import { RoomManager } from './models/RoomManager';
+import { adminActionType, userActionType } from './types';
 
 const app: Application = express();
 const port = 3000;
@@ -22,18 +23,14 @@ export const io = new Server(httpServer, {
 io.of('/').on('connection', (socket: Socket) => {
   console.log('New client connected:', socket.id);
   
-  // Listen for messages from the client
-  socket.on('message', (msg: string) => {
-    console.log('Received message:', msg);
-    io.emit('message', `Server: ${msg}`);
-  });
+  socket.on("user-actions",(action: userActionType,body)=>{
+
+  })
+
+  socket.on("admin-actions",(action: adminActionType,body)=>{
+    
+  })
   
-  
-  
-  socket.on("create-room", () => {
-    //check if it is an admin.
-    //roomManager.createRoom()
-  });
   
   // Handle client disconnect
   socket.on('disconnect', () => {
