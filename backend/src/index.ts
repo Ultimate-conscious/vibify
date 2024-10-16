@@ -21,6 +21,7 @@ export const io = new Server(httpServer, {
 
 
 io.of('/').on('connection', (socket: Socket) => {
+
   console.log('New client connected:', socket.id);
   
   socket.on("user-actions",(action: userActionType,body)=>{
@@ -28,7 +29,28 @@ io.of('/').on('connection', (socket: Socket) => {
   })
 
   socket.on("admin-actions",(action: adminActionType,body)=>{
-    
+    //check if this is a admin.
+      if(action === "create-room"){
+          console.log(body);
+          roomManager.createRoom(socket);
+      }
+      else if (action === "delete-room"){
+          roomManager.deleteRoom(socket,body.roomId);
+      }
+      else if(action === "remove-user"){
+
+          const room = RoomManager.roomMap.get(socket.id);
+          if(room){
+              room.removeUser(body.userId,body.roomId);
+          }
+      }
+      else if(action === "remove-song"){
+          const room = RoomManager.roomMap.get(socket.id);
+          if(room){
+              room.removeSong(body.url);
+          }
+          //socket.emit("song-queue",room?.songsQueue);
+      }
   })
   
   
@@ -37,9 +59,6 @@ io.of('/').on('connection', (socket: Socket) => {
     console.log('Client disconnected:', socket.id);
   });
 });
-
-
-
 
 
 
