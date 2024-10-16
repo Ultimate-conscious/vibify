@@ -18,7 +18,7 @@ export const io = new Server(httpServer, {
   },
 });
 
-
+ 
 
 io.of('/').on('connection', (socket: Socket) => {
 
@@ -30,27 +30,41 @@ io.of('/').on('connection', (socket: Socket) => {
 
   socket.on("admin-actions",(action: adminActionType,body)=>{
     //check if this is a admin.
-      if(action === "create-room"){
-          console.log(body);
-          roomManager.createRoom(socket);
+    switch (action) {
+      case "create-room":{
+        console.log(body);
+        roomManager.createRoom(socket);
+        break;
       }
-      else if (action === "delete-room"){
-          roomManager.deleteRoom(socket,body.roomId);
-      }
-      else if(action === "remove-user"){
 
-          const room = RoomManager.roomMap.get(socket.id);
-          if(room){
-              room.removeUser(body.userId,body.roomId);
-          }
+      case "delete-room":{
+        console.log(body);
+        roomManager.deleteRoom(socket,body.roomId);
+        break;
       }
-      else if(action === "remove-song"){
-          const room = RoomManager.roomMap.get(socket.id);
-          if(room){
-              room.removeSong(body.url);
-          }
-          //socket.emit("song-queue",room?.songsQueue);
+
+      case "remove-user":{
+        console.log(body);
+        const room = RoomManager.roomMap.get(socket.id);
+        if(room){
+            room.removeUser(body.userId,body.roomId);
+        }
+        break;
       }
+
+      case "remove-song":{
+        console.log(body);
+        const room = RoomManager.roomMap.get(socket.id);
+        if(room){
+            room.removeSong(body.url);
+        }
+        //socket.emit("song-queue",room?.songsQueue);
+        break;
+      }
+    
+      default:
+        break;
+    }
   })
   
   
