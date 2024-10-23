@@ -13,22 +13,55 @@ const roomManager = new RoomManager();
 
 export const io = new Server(httpServer, {
   cors: {
-    origin: '*', 
+    origin: 'http://localhost:5173', 
     methods: ['GET', 'POST'],
   },
 });
-
- 
 
 io.of('/').on('connection', (socket: Socket) => {
 
   console.log('New client connected:', socket.id);
   
-  socket.on("user-actions",(action: userActionType,body)=>{
+  socket.on("user-actions", (action: userActionType, body)=>{
+    const roomId = body.roomId;
+    const room = RoomManager.roomMap.get(roomId);
 
+    if(!room){
+      console.log("Room not found");
+      return;
+    }
+
+    switch (action) {
+      case "join-room":{
+        socket.join(roomId);
+        break;
+      }
+
+      case "add-song":{
+        room.addSong({
+          url: body.songUrl, 
+          upvotes: 1
+        });
+        break;
+      }
+
+      case "upvote-song":{
+        room.upvoteSong(body.songUrl);
+        break;
+      }
+
+      case "downvote-song":{
+        room.downvoteSong(body.songUrl);
+        break;
+      }
+
+      default:
+        console.log("Invalid action");
+        break;
+    }
   })
 
-  socket.on("admin-actions",(action: adminActionType,body)=>{
+  socket.on("admin-actions", (action: adminActionType, body)=>{
     //check if this is a admin.
     switch (action) {
       case "create-room":{
