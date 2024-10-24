@@ -1,12 +1,12 @@
 //import { useState } from 'react'
 
+import { MusicPlayerLayoutComponent } from "./components/music-player-layout"
+
 function App() {
 
   return (
     <>
-      <div>
-        <h1>Hello World</h1>
-      </div>
+      <MusicPlayerLayoutComponent />
     </>
   )
 }
