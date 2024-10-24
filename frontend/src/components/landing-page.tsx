@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Music, Users, Zap, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export function LandingPageComponent() {
   const [email, setEmail] = useState('')
@@ -16,12 +17,16 @@ export function LandingPageComponent() {
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-800 text-white">
       <header className="container mx-auto px-4 py-6">
         <nav className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 hover:cursor-pointer">
+          <div className="flex items-center space-x-2 ">
             <Music className="h-8 w-8" />
             <span className="text-2xl font-bold">Vibify</span>
           </div>
+          </Link>
           <div className="space-x-4">
-            <Button variant="ghost" className="text-white hover:text-purple-200">Login</Button>
+            <Link to="/admin">
+              <Button variant="ghost" className="text-white hover:text-purple-200">Login</Button>
+            </Link>
             <Button variant="outline" className="text-purple-600 border-white hover:bg-white">Sign Up</Button>
           </div>
         </nav>
