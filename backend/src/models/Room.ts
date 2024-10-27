@@ -9,11 +9,13 @@ type role = "admin" | "user";
 
 export class Room {
   public roomId: string;
+  public roomName: string;
   public songsQueue: song[];
 
-  constructor(roomId: string){
+  constructor(roomId: string, roomName: string){
     //randomly generate a room id
     this.roomId = roomId;
+    this.roomName = roomName;
     this.songsQueue = [];
   }
 

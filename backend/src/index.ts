@@ -24,7 +24,7 @@ io.of('/').on('connection', (socket: Socket) => {
   
   socket.on("user-actions", (action: userActionType, body)=>{
     const roomId = body.roomId;
-    const room = RoomManager.roomMap.get(roomId);
+    const room = RoomManager.roomMap.get(body.roomId);
 
     if(!room){
       console.log("Room not found");
@@ -63,33 +63,46 @@ io.of('/').on('connection', (socket: Socket) => {
 
   socket.on("admin-actions", (action: adminActionType, body)=>{
     //check if this is a admin.
+
+    console.log(body);
+
     switch (action) {
       case "create-room":{
-        console.log(body);
-        roomManager.createRoom(socket);
+        const roomId = roomManager.createRoom(socket, body.roomName);
+        
+        if(!roomId){
+          socket.emit("error", "Room creation failed");
+          break;
+        }
+
+        socket.emit("room-created", roomId);
         break;
       }
 
       case "delete-room":{
-        console.log(body);
-        roomManager.deleteRoom(socket,body.roomId);
+        if(!body.roomId){
+          socket.emit("error", "Room deletion failed");
+          break;
+        }
+        //Emit here if we want
+        roomManager.deleteRoom(socket, body.roomId);
+        socket.emit("room-deleted", body.roomId);  
         break;
       }
 
-      case "remove-user":{
-        console.log(body);
-        const room = RoomManager.roomMap.get(socket.id);
+      case "remove-user":{ 
+        const room = RoomManager.roomMap.get(body.roomId);
+        //Use another way than socket.id
         if(room){
-            room.removeUser(body.userId,body.roomId);
+          room.removeUser(body.userId, body.roomId);
         }
         break;
       }
 
       case "remove-song":{
-        console.log(body);
-        const room = RoomManager.roomMap.get(socket.id);
+        const room = RoomManager.roomMap.get(body.roomId);
         if(room){
-            room.removeSong(body.url);
+          room.removeSong(body.url);
         }
         //socket.emit("song-queue",room?.songsQueue);
         break;
@@ -100,14 +113,11 @@ io.of('/').on('connection', (socket: Socket) => {
     }
   })
   
-  
   // Handle client disconnect
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
   });
 });
-
-
 
 
 app.get('/', (req: Request, res: Response) => {
