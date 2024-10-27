@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { Music, Users, Calendar, Clock, Link as LinkIcon, List } from 'lucide-react'
-import QuickStats from './quickStats'
-import ListnerActivity from './listnerActivity'
-import PastJammingSessions from './pastJammingSessions'
+
+import { Music } from 'lucide-react'
+
 
 
 const CreeateRoom = () => {
