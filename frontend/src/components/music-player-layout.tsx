@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { MessageSquare, Music, User } from 'lucide-react'
@@ -6,9 +6,29 @@ import CurrentlyPlayingCard from './currentlyPlayingCard'
 import SongQueue from './songQueue'
 import SideChat from './sideChat'
 import { socket } from '@/socket'
+import { useParams } from 'react-router-dom'
 
 export function MusicPlayerLayoutComponent() {
-  const [songUrl, setSongUrl] = useState('')
+  const [songUrl, setSongUrl] = useState('');
+  // define in use effect how to fetch the song list first time
+  //const [songList,setSongList] = useState([]);
+  const pathParams = useParams();
+
+  useEffect(()=>{
+    console.log(pathParams.roomId);
+    // socket.emit("join-room", {roomId: pathParams.roomId})
+    // socket.on("add-join-song-queue",(data)=>{
+    //     console.log(data);
+    // })
+    //socket.on("someone-upvoted-song",(data)=>{
+    //      // add a state array of songs which can be updates on this event
+    //     console.log(data)
+    //})
+    // return ()=>{
+    //   socket.off("add-join-song-queue")
+    //   socket.off("someone-upvoted-song")
+    // }
+  },[])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,7 +44,7 @@ export function MusicPlayerLayoutComponent() {
       <header className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-2xl font-bold text-gray-800">Collaborative Jams</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Vibify</h1>
             <nav className="flex space-x-4">
               <Button variant="ghost" className="text-gray-600 hover:text-gray-900">
                 <Music className="mr-2 h-4 w-4" />

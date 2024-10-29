@@ -3,6 +3,8 @@ import { ChevronUp } from "lucide-react"
 import { Button } from "./ui/button"
 
 const SongQueue = ()=>{
+  //Take the songlist as prop and put a upvote handler
+
     return (
         <>
         <h2 className="text-xl font-semibold mb-4 text-gray-800">Up Next</h2>

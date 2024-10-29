@@ -11,9 +11,9 @@ function App() {
       <BrowserRouter >
         <Routes>
           <Route path="/" element={<LandingPage/>} />
-          <Route path="/player" element={<MusicPage/>} />
+          <Route path="/room/:roomId" element={<MusicPage/>} />
           <Route path="/admin" element={<HostProfile/>} />
-          <Route path="/room/:roomId" element={<AdminMusicPage/>} />
+          <Route path="/player" element={<AdminMusicPage/>} />
         </Routes>
           
       </BrowserRouter>
