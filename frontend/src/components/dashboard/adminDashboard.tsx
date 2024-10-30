@@ -1,12 +1,9 @@
-import QuickStats from './quickStats'
-import ListnerActivity from './listnerActivity'
-import PastJammingSessions from './pastJammingSessions'
-import CreeateRoom from './createRoom'
+import QuickStats from '@/components/dashboard/quickStats'
+import ListnerActivity from '@/components/dashboard/listnerActivity'
+import PastJammingSessions from '@/components/dashboard/pastJammingSessions'
+import CreeateRoom from '@/components/dashboard/createRoom'
 
-
-
-
-export function AdminHostPageComponent() {
+export function AdminDashboardComponent() {
 
   return (
     <div className="min-h-screen bg-gray-100">

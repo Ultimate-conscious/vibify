@@ -1,10 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import { Input } from "./ui/input"
+import { Input } from "../ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 const SideChat = () => {
     return (
-        <div className="w-80 bg-white p-4 rounded-lg shadow-sm border border-gray-200 hidden lg:block">
+        <div className="w-full bg-white p-4 rounded-lg shadow-sm border border-gray-200 hidden lg:block">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">Chat</h2>
             <ScrollArea className="h-[calc(100vh-16rem)]">
               <div className="space-y-4">

@@ -1,23 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { MusicPage } from "./pages/MusicPage"
+import { ThemeProvider } from "./components/theme/theme-provider"
+import { MusicPage } from "./pages/Room"
 import { LandingPage } from "./pages/Landing"
-import { HostProfile } from "./pages/HostProfile"
-import AdminMusicPage from "./pages/AdminMusicPage"
+import { AdminDashboard } from "./pages/AdminDashboard"
+import AdminMusicPage from "./pages/AdminRoom"
 
 function App() {
-
   return (
-    <>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <BrowserRouter >
         <Routes>
           <Route path="/" element={<LandingPage/>} />
           <Route path="/room/:roomId" element={<MusicPage/>} />
-          <Route path="/admin" element={<HostProfile/>} />
+          <Route path="/admin" element={<AdminDashboard/>} />
           <Route path="/player" element={<AdminMusicPage/>} />
         </Routes>
-          
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   )
 }
 

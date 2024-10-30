@@ -1,5 +1,5 @@
 import { Bar, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, BarChart } from "recharts"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 // Mock data for charts and tables
 const sessionData = [
     { name: 'Monday', listeners: 45 },
