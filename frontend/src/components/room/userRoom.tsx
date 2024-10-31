@@ -11,23 +11,13 @@ import { ModeToggle } from '../theme/mode-toggle'
 
 export function UserRoomComponent() {
   const [songUrl, setSongUrl] = useState('');
-  // define in use effect how to fetch the song list first time
-  //const [songList,setSongList] = useState([]);
   const pathParams = useParams();
 
   useEffect(()=>{
     console.log(pathParams.roomId);
     // socket.emit("join-room", {roomId: pathParams.roomId})
-    // socket.on("add-join-song-queue",(data)=>{
-    //     console.log(data);
-    // })
-    //socket.on("someone-upvoted-song",(data)=>{
-    //      // add a state array of songs which can be updates on this event
-    //     console.log(data)
-    //})
     // return ()=>{
-    //   socket.off("add-join-song-queue")
-    //   socket.off("someone-upvoted-song")
+    //   socket.emit("leave-room", {roomId: pathParams.roomId})
     // }
   },[])
 

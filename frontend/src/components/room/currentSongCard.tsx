@@ -6,8 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { SongEntity } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 export default function CurrentSongCard(){
+  const [currentSong, setCurrentSong] = useState<SongEntity>();
+  useEffect(()=>{
+    // socket.on("currently-playing",(data)=>{
+    //     console.log(data);
+    //     setCurrentSong(data);
+    // })
+    // return ()=>{
+    //   socket.off("currently-playing");
+    //}
+  },[])
+
   return (
     <Card className="flex flex-col md:flex-row items-center w-full">
       <CardHeader>

@@ -1,9 +1,27 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react";
+import { SongEntity } from "@/lib/types";
+
+
 
 const SongQueue = ()=>{
     //Take the songlist as prop and put a upvote handler
+    //Take the songlist as prop and put a upvote handler
+    const [songList,setSongList] = useState<SongEntity[]>([]);
+
+    useEffect(()=>{
+      // socket.on("song-queue-updates",(data)=>{
+      //     console.log(data);
+      //    //sort the list based on upvotes
+      //     setSongList(data);
+      // })
+      // return ()=>{
+      //   socket.off("song-queue-updates")
+      //}
+    },[])
+
     return (
         <>
           <h2 className="text-xl font-bold mx-6 my-4">Up Next</h2>
