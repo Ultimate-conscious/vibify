@@ -17,12 +17,14 @@ const CreeateRoom = () => {
     const handleCreateRoom = (e: React.FormEvent) => {
         e.preventDefault()
         console.log('Room created:', roomName)
+        console.log("Playlist URL:", playlistUrl)
         //const roomId = socket.emit('create-room', { roomName });
         // socket.emit('create-room', { roomName })
         // socket.emit('add-song', { songUrl: playlistUrl })
         //navigate('/room/' + roomId)
+        setPlaylistUrl('')
         setRoomName('')
-
+        navigate('/player')
       }
     
 

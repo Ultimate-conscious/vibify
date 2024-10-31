@@ -1,12 +1,12 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { ChevronUp } from "lucide-react"
+import { ChevronUp, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react";
 import { SongEntity } from "@/lib/types";
 
 
 
-const SongQueue = ()=>{
+const SongQueue = ({role}:{role?: string})=>{
     //Take the songlist as prop and put a upvote handler
     //Take the songlist as prop and put a upvote handler
     const [songList,setSongList] = useState<SongEntity[]>([]);
@@ -22,6 +22,16 @@ const SongQueue = ()=>{
       //}
     },[])
 
+    const upvoteHandler = ()=>{
+      // socket.emit("upvote-song",{songId:1})
+      alert("Upvoted")
+    }
+
+    const deleteHandler = ()=>{
+      // socket.emit("delete-song",{songId:1})
+      alert("Song deleted")
+    }
+
     return (
         <>
           <h2 className="text-xl font-bold mx-6 my-4">Up Next</h2>
@@ -36,10 +46,16 @@ const SongQueue = ()=>{
                       <p className="text-sm">Queued Artist</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="space-x-1">
+                  <Button onClick={upvoteHandler} variant="outline" size="sm" className="space-x-1 hover:cursor-pointer">
                     <ChevronUp className="h-4 w-4" />
                     <span>{Math.floor(Math.random() * 50)}</span>
                   </Button>
+                  {role === "admin" ?  
+                  <Button onClick={deleteHandler} variant="outline" size="sm" className="space-x-1 hover:cursor-pointer">
+                    <Trash2 className="h-4 w-4" />
+                    <span>Delete</span>
+                  </Button> : null}
+                 
                 </div>
               ))}
             </div>
